@@ -1,12 +1,16 @@
 import { Choice } from '@/app/types/Choice';
-import { Condition } from '@/app/types/Condition';
+import { Logic } from '@/app/types/Logic';
 import { Theme } from '@/app/types/Theme';
 
 export type Question = {
   id: number;
   title: string;
-  choices: Array<Choice>;
-  conditions: Array<Condition>;
+  subtext?: string;
+  text?: string;
+  slug?: string;
+  dynamicFields?: string[];
+  choices: Choice[];
+  logic: Logic[];
   nextQuestionId: number | null;
   theme?: Theme;
 };
