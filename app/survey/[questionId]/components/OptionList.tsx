@@ -1,38 +1,26 @@
-'use client';
 import { Choice } from '@/app/types/Choice';
 import Link from 'next/link';
-import { useSurvey } from '@/app/components/SurveyContext';
-import { Question } from '@/app/types/Question';
 
-export function OptionList({ question }: { question: Question }) {
-  const [survey, setSurvey] = useSurvey();
-  console.log(survey);
-  const getNextQuestionId = (choice: Choice) => {
-    if (question.nextQuestionId) {
-      return `/survey/${question.nextQuestionId}`;
-    }
-
-    const conditionMet = question.logic.find((logic) =>
-      logic.conditions.every((condition) => {
-        const savedAnswer = survey ? survey[condition.questionId] : null;
-
-        const answer = condition.questionId === question.id ? choice.id : savedAnswer;
-
-        return condition.expectedChoiceId === answer;
-      })
-    );
-
-    return `/survey/${conditionMet?.nextQuestionId}`;
-  };
-
-  const handleChoiceSelect = (choice: Choice) => () => {
-    setSurvey({ ...survey, [question.id]: choice.id });
-  };
-
+export function OptionList({
+  options,
+  getPath,
+  onSelect,
+}: {
+  options: Choice[];
+  onSelect: (choice: Choice) => () => void;
+  getPath: (choice: Choice) => string;
+}) {
   return (
-    <ul>
-      {question.choices.map((choice) => (
-        <Link key={choice.id} href={getNextQuestionId(choice)} onClick={handleChoiceSelect(choice)}>
+    <ul className={'flex flex-col gap-y-5'}>
+      {options.map((choice) => (
+        <Link
+          key={choice.id}
+          href={getPath(choice)}
+          onClick={onSelect(choice)}
+          className={
+            'bg-lightGrey rounded-2xl text-center text-sm py-5 px-4 drop-shadow-md hover:bg-gradient-to-b from-purple-600 to-blue-600 hover:text-white'
+          }
+        >
           {choice.title}
         </Link>
       ))}

@@ -1,7 +1,10 @@
 'use client';
 import React, { createContext, useState } from 'react';
 
-const useSurveyState = () => useState<{ [key: number]: number } | null>(null);
+const useSurveyState = (initialState: { [key: number]: number }) =>
+  useState<{
+    [key: number]: number;
+  } | null>(initialState);
 
 export const SurveyContext = createContext<ReturnType<typeof useSurveyState> | null>(null);
 
@@ -16,7 +19,10 @@ export const useSurvey = () => {
 };
 
 const SurveyProvider = ({ children }: { children: React.ReactNode }) => {
-  const [survey, setSurvey] = useSurveyState();
+  const surveyAnswersFromLS = localStorage.getItem('surveyAnswers');
+  const storedAnswers = surveyAnswersFromLS ? JSON.parse(surveyAnswersFromLS) : null;
+
+  const [survey, setSurvey] = useSurveyState(storedAnswers);
 
   return <SurveyContext.Provider value={[survey, setSurvey]}>{children}</SurveyContext.Provider>;
 };

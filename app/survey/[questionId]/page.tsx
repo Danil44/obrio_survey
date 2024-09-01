@@ -1,5 +1,8 @@
 import surveyConfig from '@/app/surveyConfig';
-import { OptionList } from '@/app/survey/[questionId]/components/OptionList';
+import { Question } from '@/app/survey/[questionId]/components/Question';
+import Image from 'next/image';
+import React from 'react';
+import logo from '../../logo.svg';
 
 export function generateStaticParams() {
   return surveyConfig.questions.map((question) => ({
@@ -15,14 +18,11 @@ export default function Page({ params }: { params: { questionId: string } }) {
   }
 
   return (
-    <div>
-      <h1>{question.title}</h1>
-
-      {question.subtext && <b>{question.subtext}</b>}
-
-      {question.text && <p>{question.text}</p>}
-
-      <OptionList question={question} />
+    <div className="bg-primary min-h-screen flex flex-col w-full items-center">
+      <header className={'py-4 mb-4'}>
+        <Image src={logo} alt={'logo'} width={15} height={16} />
+      </header>
+      <Question question={question} questions={surveyConfig.questions} />
     </div>
   );
 }
