@@ -6,7 +6,7 @@ import logo from '../logo.svg';
 
 export function generateStaticParams() {
   return surveyConfig.screens.map((screen) => ({
-    path: screen.id,
+    id: screen.id,
   }));
 }
 
