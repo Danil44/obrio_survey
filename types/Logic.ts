@@ -1,4 +1,4 @@
-import { Condition } from '@/app/types/Condition';
+import { Condition } from '@/types/Condition';
 
 export type Logic = {
   conditions: Condition[];

@@ -1,6 +1,7 @@
-import { Choice } from '@/app/types/Choice';
-import { Logic } from '@/app/types/Logic';
-import { Theme } from '@/app/types/Theme';
+import { Choice } from './Choice';
+import { Logic } from './Logic';
+import { Theme } from './Theme';
+import { DynamicField } from './DynamicField';
 
 export type Question = {
   id: number;
@@ -8,7 +9,7 @@ export type Question = {
   subtext?: string;
   text?: string;
   slug?: string;
-  dynamicFields?: string[];
+  dynamicFields?: DynamicField[];
   choices: Choice[];
   logic: Logic[];
   nextQuestionId: number | null;
