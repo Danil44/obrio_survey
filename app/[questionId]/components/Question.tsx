@@ -1,9 +1,9 @@
 'use client';
 
-import { OptionList } from '@/app/[questionId]/components/OptionList';
-import type { Question } from '@/app/types/Question';
-import { useSurvey } from '@/app/components/SurveyContext';
-import type { Choice } from '@/app/types/Choice';
+import { OptionList } from './OptionList';
+import type { Question } from '@/types/Question';
+import { useSurvey } from '@/components/SurveyContext';
+import type { Choice } from '@/types/Choice';
 
 function replaceDynamicFields(text: string, answers: { [key: string]: string }): string {
   return text.replace(/{(.*?)}/g, (_, key) => answers[key] || '');
