@@ -19,7 +19,7 @@ export const useSurvey = () => {
 };
 
 const SurveyProvider = ({ children }: { children: React.ReactNode }) => {
-  const surveyAnswersFromLS = localStorage.getItem('surveyAnswers');
+  const surveyAnswersFromLS = typeof window !== 'undefined' ? window.localStorage.getItem('surveyAnswers') : null;
   const storedAnswers = surveyAnswersFromLS ? JSON.parse(surveyAnswersFromLS) : null;
 
   const [survey, setSurvey] = useSurveyState(storedAnswers);

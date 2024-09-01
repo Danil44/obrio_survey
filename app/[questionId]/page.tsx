@@ -1,12 +1,17 @@
 import surveyConfig from '@/app/surveyConfig';
-import { Question } from '@/app/survey/[questionId]/components/Question';
+import { Question } from '@/app/[questionId]/components/Question';
 import Image from 'next/image';
 import React from 'react';
-import logo from '../../logo.svg';
+import logo from '../logo.svg';
 
 export function generateStaticParams() {
+  console.log(
+    surveyConfig.questions.map((question) => ({
+      params: { questionId: question.id },
+    }))
+  );
   return surveyConfig.questions.map((question) => ({
-    params: { questionId: question.id },
+    questionId: question.id.toString(),
   }));
 }
 
