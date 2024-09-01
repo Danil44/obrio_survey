@@ -1,9 +1,9 @@
 'use client';
 import React, { createContext, useState } from 'react';
 
-const useSurveyState = (initialState: { [key: number]: number }) =>
+const useSurveyState = (initialState: { [key: string]: number }) =>
   useState<{
-    [key: number]: number;
+    [key: string]: number;
   } | null>(initialState);
 
 export const SurveyContext = createContext<ReturnType<typeof useSurveyState> | null>(null);
