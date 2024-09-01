@@ -4,9 +4,33 @@ import { OptionList } from './OptionList';
 import type { Question } from '@/types/Question';
 import { useSurvey } from '@/components/SurveyContext';
 import type { Choice } from '@/types/Choice';
+import { DynamicField } from '@/types/DynamicField';
 
-function replaceDynamicFields(text: string, answers: { [key: string]: string }): string {
-  return text.replace(/{(.*?)}/g, (_, key) => answers[key] || '');
+function processDynamicText(
+  text: string,
+  dynamicFields: DynamicField[],
+  answers: {
+    [key: number]: number;
+  },
+  questions: Question[]
+) {
+  return text.replace(/{(.*?)}/g, (_, key) => {
+    const field = dynamicFields.find(({ field }) => field === key);
+
+    if (field) {
+      if (field.type === 'answer') {
+        const question = questions.find((question) => question.id === field.questionId);
+
+        return question?.choices.find((choice) => choice.id === answers[field.questionId])?.title || '';
+      } else if (field.type === 'conditional') {
+        const conditionMet = answers[field.condition.questionId] === field.condition.expectedChoiceId;
+
+        return conditionMet ? key : '';
+      }
+    }
+
+    return '';
+  });
 }
 
 export function Question({ question, questions }: { question: Question; questions: Question[] }) {
@@ -38,20 +62,10 @@ export function Question({ question, questions }: { question: Question; question
     }
   };
 
-  const formattedTitle = replaceDynamicFields(
-    question.title,
-    questions.reduce((acc, nextQuestion) => {
-      if (nextQuestion.slug) {
-        return {
-          ...acc,
-          [nextQuestion.slug]: survey
-            ? nextQuestion.choices.find((choice) => choice.id === survey[nextQuestion.id])?.title
-            : null,
-        };
-      }
-      return acc;
-    }, {})
-  );
+  const formattedTitle =
+    question.dynamicFields && survey
+      ? processDynamicText(question.title, question.dynamicFields, survey, questions)
+      : question.title;
 
   return (
     <div className={'flex flex-col w-330 gap-y-7'}>

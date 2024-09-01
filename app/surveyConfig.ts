@@ -9,7 +9,6 @@ const surveyConfig: SurveyConfig = {
     {
       id: 1,
       nextQuestionId: 2,
-      slug: 'gender',
       choices: [
         {
           id: 1,
@@ -54,7 +53,7 @@ const surveyConfig: SurveyConfig = {
               questionId: 2,
             },
           ],
-          nextQuestionId: 4,
+          nextQuestionId: 9,
         },
       ],
     },
@@ -92,8 +91,19 @@ const surveyConfig: SurveyConfig = {
         },
       ],
       title:
-        '{gender} {who have children (if have children)} need a slightly different approach to improve their relationship. Which statement best describes you?',
-      dynamicFields: ['gender'],
+        '{gender} {who have children} need a slightly different approach to improve their relationship. Which statement best describes you?',
+      dynamicFields: [
+        {
+          field: 'gender',
+          type: 'answer',
+          questionId: 1,
+        },
+        {
+          field: 'who have children',
+          type: 'conditional',
+          condition: { questionId: 3, expectedChoiceId: 1 },
+        },
+      ],
       logic: [],
     },
     {
@@ -231,8 +241,19 @@ const surveyConfig: SurveyConfig = {
         },
       ],
       title:
-        'Single {gender} {who have children (if have children)} need a slightly different approach to find their perfect partner. But first, how did you feel in your last relationship?',
-      dynamicFields: ['gender'],
+        'Single {gender} {who have children} need a slightly different approach to find their perfect partner. But first, how did you feel in your last relationship?',
+      dynamicFields: [
+        {
+          field: 'gender',
+          type: 'answer',
+          questionId: 1,
+        },
+        {
+          field: 'who have children',
+          type: 'conditional',
+          condition: { questionId: 9, expectedChoiceId: 1 },
+        },
+      ],
       logic: [],
     },
     {
