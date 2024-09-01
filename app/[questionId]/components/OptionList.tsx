@@ -1,4 +1,4 @@
-import { Choice } from '@/app/types/Choice';
+import { Choice } from '@/types/Choice';
 import Link from 'next/link';
 
 export function OptionList({

@@ -1,6 +1,6 @@
-import { Choice } from '@/app/types/Choice';
-import { Logic } from '@/app/types/Logic';
-import { Theme } from '@/app/types/Theme';
+import { Choice } from '@/types/Choice';
+import { Logic } from '@/types/Logic';
+import { Theme } from '@/types/Theme';
 
 export type Question = {
   id: number;

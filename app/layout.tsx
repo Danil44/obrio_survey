@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
 import './globals.css';
-import SurveyProvider from '@/app/components/SurveyContext';
+import SurveyProvider from '@/components/SurveyContext';
 import React from 'react';
 
 const inter = Open_Sans({ subsets: ['latin'] });
