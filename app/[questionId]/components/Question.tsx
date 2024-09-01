@@ -1,6 +1,6 @@
 'use client';
 
-import { OptionList } from '@/app/survey/[questionId]/components/OptionList';
+import { OptionList } from '@/app/[questionId]/components/OptionList';
 import type { Question } from '@/app/types/Question';
 import { useSurvey } from '@/app/components/SurveyContext';
 import type { Choice } from '@/app/types/Choice';
@@ -14,7 +14,7 @@ export function Question({ question, questions }: { question: Question; question
 
   const getNextQuestionId = (choice: Choice) => {
     if (question.nextQuestionId) {
-      return `/survey/${question.nextQuestionId}`;
+      return `/${question.nextQuestionId}`;
     }
 
     const conditionMet = question.logic.find((logic) =>
@@ -27,12 +27,15 @@ export function Question({ question, questions }: { question: Question; question
       })
     );
 
-    return `/survey/${conditionMet?.nextQuestionId}`;
+    return `/${conditionMet?.nextQuestionId}`;
   };
 
   const handleChoiceSelect = (choice: Choice) => () => {
     setSurvey({ ...(survey || {}), [question.id]: choice.id });
-    localStorage.setItem('surveyAnswers', JSON.stringify({ ...(survey || {}), [question.id]: choice.id }));
+
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('surveyAnswers', JSON.stringify({ ...(survey || {}), [question.id]: choice.id }));
+    }
   };
 
   const formattedTitle = replaceDynamicFields(
