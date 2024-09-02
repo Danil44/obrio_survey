@@ -34,7 +34,7 @@ export function Header({
       .map((screen) => screen.id);
 
     return previousScreenIds.find((screenId) => survey && Boolean(survey[screenId])) || 'gender';
-  }, []);
+  }, [currentScreenId, screens, survey]);
 
   const clearCurrentAnswer = useCallback(() => {
     const { [currentScreenId]: value, ...withoutCurrentAnswer } = survey || {};
@@ -44,7 +44,7 @@ export function Header({
     if (typeof window !== 'undefined') {
       window.localStorage.setItem('surveyAnswers', JSON.stringify(withoutCurrentAnswer));
     }
-  }, [currentScreenId, survey]);
+  }, [currentScreenId, survey, setSurvey]);
 
   return (
     <header className={'py-4 mb-4 container flex justify-center mx-auto relative'}>
