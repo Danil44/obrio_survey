@@ -1,7 +1,7 @@
 'use client';
 import React, { createContext, useCallback, useEffect, useState } from 'react';
 
-type Survey = {
+export type Survey = {
   [key: string]: number;
 };
 
