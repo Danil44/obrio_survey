@@ -8,6 +8,7 @@ export type Screen = {
   title: string;
   choices: Choice[];
   next: { [choiceId: number]: { screenId: string; condition: Condition }[] | string };
+  subtitle?: string;
   text?: string;
   dynamicFields?: DynamicField[];
   theme?: Theme;
