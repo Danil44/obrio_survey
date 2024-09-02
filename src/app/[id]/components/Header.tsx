@@ -5,7 +5,7 @@ import logoDark from '@/src/media/logo_dark.svg';
 import Link from 'next/link';
 import arrowBack from '@/src/media/left_arrow.svg';
 import { Screen } from '@/src/types/Screen';
-import { useScreensNavigation } from '@/src/app/[id]/useScreensNavigation';
+import { useScreensNavigation } from '@/src/app/[id]/hooks/useScreensNavigation';
 
 export function Header({ screens, currentScreen }: { screens: Screen[]; currentScreen: Screen }) {
   const { previousScreenId, clearCurrentAnswer } = useScreensNavigation({ screens, currentScreen });
