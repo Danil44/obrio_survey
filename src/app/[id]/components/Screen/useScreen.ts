@@ -1,7 +1,37 @@
 import { Choice } from '@/src/types/Choice';
-import { useSurvey } from '@/src/store/survey';
-import type { Screen } from '@/src/types/Screen';
+import { Survey, useSurvey } from '@/src/store/survey';
+import { Screen } from '@/src/types/Screen';
 import { useMemo } from 'react';
+import { Condition } from '@/src/types/Condition';
+
+const getConditionalFieldValue = (field: string, condition: Condition, survey: Survey) => {
+  const conditionMet = survey[condition.screenId] === condition.expectedChoiceId;
+  return conditionMet ? field : '';
+};
+
+const getAnswerFieldValue = (screenId: string, screens: Screen[], survey: Survey) => {
+  const relatedScreen = screens.find(({ id }) => id === screenId);
+  if (!relatedScreen) return '';
+
+  const selectedChoice = relatedScreen.choices.find(({ id }) => id === survey[screenId]);
+  return selectedChoice?.title || '';
+};
+
+const getFieldValue = (key: string, screen: Screen, screens: Screen[], survey: Survey) => {
+  const dynamicField = screen.dynamicFields?.find(({ field }) => field === key);
+  
+  if (!dynamicField) return '';
+
+  if (dynamicField.type === 'answer') {
+    return getAnswerFieldValue(dynamicField.screenId, screens, survey);
+  }
+
+  if (dynamicField.type === 'conditional') {
+    return getConditionalFieldValue(dynamicField.field, dynamicField.condition, survey);
+  }
+
+  return '';
+};
 
 export const useScreen = (screen: Screen, screens: Screen[]) => {
   const { survey, updateSurvey } = useSurvey();
@@ -15,23 +45,7 @@ export const useScreen = (screen: Screen, screens: Screen[]) => {
   };
 
   const title = useMemo(
-    () =>
-      screen.title.replace(/{(.*?)}/g, (_, key) => {
-        const field = screen.dynamicFields?.find(({ field }) => field === key);
-        if (field) {
-          if (field.type === 'answer') {
-            const screen = screens.find((item) => item.id === field.screenId);
-
-            return screen?.choices.find((choice) => choice.id === survey[field.screenId])?.title || '';
-          } else if (field.type === 'conditional') {
-            const conditionMet = survey[field.condition.screenId] === field.condition.expectedChoiceId;
-
-            return conditionMet ? key : '';
-          }
-        }
-
-        return '';
-      }),
+    () => screen.title.replace(/{(.*?)}/g, (_, key) => getFieldValue(key, screen, screens, survey)),
     [screen, survey, screens]
   );
 
