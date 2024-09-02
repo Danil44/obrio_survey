@@ -1,4 +1,4 @@
-import type { Screen } from '../types/Screen';
+import type { Screen } from './types/Screen';
 
 const screens: Screen[] = [
   {
@@ -194,7 +194,7 @@ const screens: Screen[] = [
   {
     id: 'sexPriority',
     title: 'Do you agree with the statement below?',
-    text: '"My partner and I make sex a priority in our relationship"',
+    subtitle: '"My partner and I make sex a priority in our relationship"',
     choices: [
       { id: 1, title: 'Strongly agree' },
       { id: 2, title: 'Agree' },

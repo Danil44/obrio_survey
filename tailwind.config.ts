@@ -8,6 +8,7 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    choiceButton: '',
     extend: {
       width: {
         330: '20.625rem',
