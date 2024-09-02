@@ -1,4 +1,4 @@
-import { Choice } from '@/types/Choice';
+import { Choice } from '@/src/types/Choice';
 import Link from 'next/link';
 
 export function OptionList({
@@ -17,9 +17,7 @@ export function OptionList({
           key={choice.id}
           href={getPath(choice)}
           onClick={onSelect(choice)}
-          className={
-            'bg-lightGrey rounded-2xl text-center text-sm py-5 px-4 drop-shadow-md hover:bg-gradient-to-b from-purple-600 to-blue-600 hover:text-white'
-          }
+          className={`bg-secondary rounded-2xl text-center text-buttons text-sm py-5 px-4 drop-shadow-md dark:text-purple`}
         >
           {choice.title}
         </Link>

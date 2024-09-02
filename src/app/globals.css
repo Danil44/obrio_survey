@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        --color-primary: #FFF0F0;
+        --color-light: #FBFBFF;
+        --color-secondary: #EAEEF7;
+        --color-buttons: #333333;
+        --color-typography: #333333;
+        --color-purple: #6A3AA2
+    }
+}
