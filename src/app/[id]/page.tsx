@@ -1,7 +1,8 @@
 import screensConfig from '@/src/screensConfig';
-import { Screen } from './components/Screen';
+import { ScreenView } from './components/ScreenView';
 import React from 'react';
 import { Header } from '@/src/app/[id]/components/Header';
+import { redirect } from 'next/navigation';
 
 export function generateStaticParams() {
   return screensConfig.screens.map((screen) => ({
@@ -13,7 +14,7 @@ export default function Page({ params }: { params: { id: string } }) {
   const screen = screensConfig.screens.find((screen) => screen.id === params.id);
 
   if (!screen) {
-    return null;
+    return redirect(`/${screensConfig.screens[0].id}`);
   }
 
   const isDarkTheme = screen.theme === 'dark';
@@ -23,7 +24,7 @@ export default function Page({ params }: { params: { id: string } }) {
       <div className={'bg-primary dark:bg-gradient min-h-screen flex flex-col w-full items-center'}>
         <Header screens={screensConfig.screens} currentScreen={screen} />
 
-        <Screen screen={screen} screens={screensConfig.screens} />
+        <ScreenView currentScreen={screen} screens={screensConfig.screens} />
       </div>
     </div>
   );
