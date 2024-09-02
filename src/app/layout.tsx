@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
 import './globals.css';
-import SurveyProvider from '@/components/SurveyContext';
+import SurveyProvider from '@/src/components/SurveyContext';
 import React from 'react';
 
 const inter = Open_Sans({ subsets: ['latin'] });
@@ -18,9 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <SurveyProvider>
-        <body className={inter.className}>{children}</body>
-      </SurveyProvider>
+      <body className={inter.className}>
+        <SurveyProvider>{children}</SurveyProvider>
+      </body>
     </html>
   );
 }
