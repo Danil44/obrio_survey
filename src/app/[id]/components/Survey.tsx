@@ -5,7 +5,12 @@ import { useSurvey } from '@/src/app/[id]/hooks/useSurvey';
 import { useQuestionsNavigation } from '@/src/app/[id]/hooks/useQuestionsNavigation';
 import Link from 'next/link';
 
-export function Survey({ currentQuestion, questionList }: { currentQuestion: Question; questionList: Question[] }) {
+type Props = {
+  currentQuestion: Question;
+  questionList: Question[];
+};
+
+export function Survey({ currentQuestion, questionList }: Props) {
   const { selectChoice, checkIsChoiceActive, title } = useSurvey(currentQuestion, questionList);
 
   const { getNextQuestionPath } = useQuestionsNavigation({ questionList: questionList, currentQuestion });

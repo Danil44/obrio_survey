@@ -8,7 +8,12 @@ import { Question } from '@/src/types/Question';
 import { useQuestionsNavigation } from '@/src/app/[id]/hooks/useQuestionsNavigation';
 import { useSurvey } from '@/src/app/[id]/hooks/useSurvey';
 
-export function Header({ questionList, currentQuestion }: { questionList: Question[]; currentQuestion: Question }) {
+type Props = {
+  questionList: Question[];
+  currentQuestion: Question;
+};
+
+export function Header({ questionList, currentQuestion }: Props) {
   const { clearCurrentAnswer } = useSurvey(currentQuestion, questionList);
 
   const { previousQuestionPath } = useQuestionsNavigation({ questionList, currentQuestion });

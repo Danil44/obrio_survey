@@ -11,9 +11,10 @@ function checkIsPreviousQuestion(question: Question, currentQuestionId: string) 
 }
 
 export function getPreviousQuestionId(questionList: Question[], currentQuestion: Question, survey: Answers) {
-  const previousQuestionIds = questionList
-    .filter((question) => checkIsPreviousQuestion(question, currentQuestion.id))
-    .map((question) => question.id);
-
-  return previousQuestionIds.find((questionId) => Boolean(survey[questionId])) || '';
+  return questionList.reduce((prevId, question) => {
+    if (!prevId && checkIsPreviousQuestion(question, currentQuestion.id) && survey[question.id]) {
+      return question.id;
+    }
+    return prevId;
+  }, '');
 }
