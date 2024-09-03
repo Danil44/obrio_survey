@@ -6,7 +6,7 @@ import { parseStringTemplate } from '@/src/utils/parseStringTemplate';
 import { getDynamicFieldValue } from '@/src/utils/getDynamicFieldValue';
 
 function removeCurrentAnswer(survey: Answers, currentQuestionId: string) {
-  const { [currentQuestionId]: _, ...withoutCurrentAnswer } = survey || {};
+  const { [currentQuestionId]: _, ...withoutCurrentAnswer } = survey;
   return withoutCurrentAnswer;
 }
 
@@ -14,7 +14,7 @@ export const useSurvey = (currentQuestion: Question, questionList: Question[]) =
   const { answers, updateAnswers } = useAnswers();
 
   const selectChoice = (choice: Choice) => () => {
-    updateAnswers({ ...(answers || {}), [currentQuestion.id]: choice.id });
+    updateAnswers({ ...answers, [currentQuestion.id]: choice.id });
   };
 
   const checkIsChoiceActive = (choice: Choice) => {

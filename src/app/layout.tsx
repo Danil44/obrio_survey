@@ -8,6 +8,7 @@ const inter = Open_Sans({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'NEBULA',
+  description: 'Personal assessment survey',
 };
 
 export default function RootLayout({
