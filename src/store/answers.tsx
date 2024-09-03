@@ -1,18 +1,19 @@
 'use client';
+
 import React, { createContext, useCallback, useEffect, useState } from 'react';
 
-export type Survey = {
+export type Answers = {
   [key: string]: number;
 };
 
 type SurveyContextProps = {
-  survey: Survey;
-  updateSurvey: (data: { [key: string]: number }) => void;
+  answers: Answers;
+  updateAnswers: (data: { [key: string]: number }) => void;
 };
 
 export const SurveyContext = createContext<SurveyContextProps | null>(null);
 
-export const useSurvey = () => {
+export const useAnswers = () => {
   const survey = React.useContext(SurveyContext);
 
   if (!survey) {
@@ -23,26 +24,26 @@ export const useSurvey = () => {
 };
 
 const SurveyProvider = ({ children }: { children: React.ReactNode }) => {
-  const [survey, setSurvey] = useState<Survey | null>(null);
+  const [answers, setAnswers] = useState<Answers | null>(null);
 
   useEffect(() => {
-    if (!survey) {
+    if (!answers) {
       const surveyAnswersFromLS = typeof window !== 'undefined' ? window.localStorage.getItem('surveyAnswers') : null;
       const storedAnswers = surveyAnswersFromLS ? JSON.parse(surveyAnswersFromLS) : null;
 
-      setSurvey(storedAnswers);
+      setAnswers(storedAnswers);
     }
-  }, [survey]);
+  }, [answers]);
 
-  const updateSurvey = useCallback((value: { [key: string]: number }) => {
-    setSurvey(value);
+  const updateAnswers = useCallback((value: { [key: string]: number }) => {
+    setAnswers(value);
 
     if (typeof window !== 'undefined') {
       window.localStorage.setItem('surveyAnswers', JSON.stringify(value));
     }
   }, []);
 
-  return <SurveyContext.Provider value={{ survey: survey || {}, updateSurvey }}>{children}</SurveyContext.Provider>;
+  return <SurveyContext.Provider value={{ answers: answers || {}, updateAnswers }}>{children}</SurveyContext.Provider>;
 };
 
 export default SurveyProvider;

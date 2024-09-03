@@ -4,7 +4,7 @@ export type DynamicField =
   | {
       field: string;
       type: 'answer';
-      screenId: string;
+      questionId: string;
     }
   | {
       field: string;

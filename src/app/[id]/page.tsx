@@ -1,30 +1,30 @@
-import screensConfig from '@/src/screensConfig';
-import { ScreenView } from './components/ScreenView';
+import surveyConfig from '@/src/surveyConfig';
+import { Survey } from './components/Survey';
 import React from 'react';
 import { Header } from '@/src/app/[id]/components/Header';
 import { redirect } from 'next/navigation';
 
 export function generateStaticParams() {
-  return screensConfig.screens.map((screen) => ({
-    id: screen.id,
+  return surveyConfig.questions.map((question) => ({
+    id: question.id,
   }));
 }
 
 export default function Page({ params }: { params: { id: string } }) {
-  const screen = screensConfig.screens.find((screen) => screen.id === params.id);
+  const question = surveyConfig.questions.find((question) => question.id === params.id);
 
-  if (!screen) {
-    return redirect(`/${screensConfig.screens[0].id}`);
+  if (!question) {
+    return redirect(`/${surveyConfig.questions[0].id}`);
   }
 
-  const isDarkTheme = screen.theme === 'dark';
+  const isDarkTheme = question.theme === 'dark';
 
   return (
     <div className={`${isDarkTheme ? 'dark' : ''}`}>
       <div className={'bg-primary dark:bg-gradient min-h-screen flex flex-col w-full items-center'}>
-        <Header screens={screensConfig.screens} currentScreen={screen} />
+        <Header questionList={surveyConfig.questions} currentQuestion={question} />
 
-        <ScreenView currentScreen={screen} screens={screensConfig.screens} />
+        <Survey currentQuestion={question} questionList={surveyConfig.questions} />
       </div>
     </div>
   );

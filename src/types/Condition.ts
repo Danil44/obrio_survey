@@ -1,4 +1,4 @@
 export type Condition = {
-  screenId: string;
+  questionId: string;
   expectedChoiceId: number;
 };

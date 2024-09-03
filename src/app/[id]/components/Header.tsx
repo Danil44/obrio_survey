@@ -4,16 +4,19 @@ import Image from 'next/image';
 import logoDark from '@/src/media/logo_dark.svg';
 import Link from 'next/link';
 import arrowBack from '@/src/media/left_arrow.svg';
-import { Screen } from '@/src/types/Screen';
-import { useScreensNavigation } from '@/src/app/[id]/hooks/useScreensNavigation';
+import { Question } from '@/src/types/Question';
+import { useQuestionsNavigation } from '@/src/app/[id]/hooks/useQuestionsNavigation';
+import { useSurvey } from '@/src/app/[id]/hooks/useSurvey';
 
-export function Header({ screens, currentScreen }: { screens: Screen[]; currentScreen: Screen }) {
-  const { previousScreenId, clearCurrentAnswer } = useScreensNavigation({ screens, currentScreen });
+export function Header({ questionList, currentQuestion }: { questionList: Question[]; currentQuestion: Question }) {
+  const { clearCurrentAnswer } = useSurvey(currentQuestion, questionList);
+  
+  const { previousQuestionPath } = useQuestionsNavigation({ questionList, currentQuestion });
 
   return (
     <header className={'py-4 mb-4 w-330 sm:container flex justify-center mx-auto relative'}>
       <Link
-        href={`/${previousScreenId}`}
+        href={`/${previousQuestionPath}`}
         onClick={clearCurrentAnswer}
         className={'absolute left-0 top-1/2 -translate-y-1/2'}
       >
