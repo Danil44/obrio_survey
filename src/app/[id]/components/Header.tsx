@@ -1,9 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import logoDark from '@/src/media/logo_dark.svg';
+import logoDark from '@/public/logo.svg';
 import Link from 'next/link';
-import arrowBack from '@/src/media/left_arrow.svg';
+import arrowBack from '@/public/left_arrow.svg';
 import { Question } from '@/src/types/Question';
 import { useQuestionsNavigation } from '@/src/app/[id]/hooks/useQuestionsNavigation';
 import { useSurvey } from '@/src/app/[id]/hooks/useSurvey';
@@ -27,6 +27,7 @@ export function Header({ questionList, currentQuestion }: Props) {
       >
         <Image src={arrowBack} alt={'back button'} className={`dark:invert`} />
       </Link>
+
       <Image src={logoDark} alt={'logo'} width={15} height={16} className="h-auto filter brightness-100 dark:invert" />
     </header>
   );
