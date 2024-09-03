@@ -15,9 +15,7 @@ export function Survey({ currentQuestion, questionList }: { currentQuestion: Que
       <h1 className={'text-2xl font-bold text-typography dark:text-light dark:text-center'}>{title}</h1>
 
       {currentQuestion.subtitle && (
-        <p className={'text-lg font-bold text-typography dark:text-light dark:text-center'}>
-          {currentQuestion.subtitle}
-        </p>
+        <p className={'text-lg font-bold text-typography dark:text-light text-center'}>{currentQuestion.subtitle}</p>
       )}
 
       {currentQuestion.text && (
@@ -29,7 +27,7 @@ export function Survey({ currentQuestion, questionList }: { currentQuestion: Que
       <ul className={'flex flex-col gap-y-5 pb-6'}>
         {currentQuestion.choices.map((choice) => {
           const isActive = checkIsChoiceActive(choice);
-          
+
           return (
             <li key={choice.id} className={'contents'}>
               <Link

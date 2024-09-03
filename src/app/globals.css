@@ -12,3 +12,9 @@
         --color-purple: #6A3AA2
     }
 }
+
+@layer utilities {
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+}

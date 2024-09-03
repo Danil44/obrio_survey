@@ -10,13 +10,13 @@ import { useSurvey } from '@/src/app/[id]/hooks/useSurvey';
 
 export function Header({ questionList, currentQuestion }: { questionList: Question[]; currentQuestion: Question }) {
   const { clearCurrentAnswer } = useSurvey(currentQuestion, questionList);
-  
+
   const { previousQuestionPath } = useQuestionsNavigation({ questionList, currentQuestion });
 
   return (
     <header className={'py-4 mb-4 w-330 sm:container flex justify-center mx-auto relative'}>
       <Link
-        href={`/${previousQuestionPath}`}
+        href={previousQuestionPath}
         onClick={clearCurrentAnswer}
         className={'absolute left-0 top-1/2 -translate-y-1/2'}
       >
