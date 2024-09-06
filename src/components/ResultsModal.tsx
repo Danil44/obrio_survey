@@ -19,7 +19,7 @@ export function ResultsModal({ show, onClose }: { show: boolean; onClose: () => 
       }
 
       const title = parseStringTemplate(question.title, (key) =>
-        getDynamicFieldValue(key, question, questions, answers)
+        getDynamicFieldValue({ key, question, questionList: questions, answers })
       );
       return {
         ...acc,

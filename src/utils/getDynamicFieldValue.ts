@@ -2,12 +2,24 @@ import { Condition } from '@/types/Condition';
 import { Question } from '@/types/Question';
 import { Answers } from '@/types/Answers';
 
-function getConditionalValue(field: string, condition: Condition, answers: Answers) {
+type GetConditionalValueInput = {
+  field: string;
+  condition: Condition;
+  answers: Answers;
+};
+
+function getConditionalValue({ field, condition, answers }: GetConditionalValueInput) {
   const conditionMet = answers[condition.questionId] === condition.expectedChoiceId;
   return conditionMet ? field : '';
 }
 
-function getAnswerValue(questionId: string, questionList: Question[], answers: Answers) {
+type GetAnswerValueInput = {
+  questionId: string;
+  questionList: Question[];
+  answers: Answers;
+};
+
+function getAnswerValue({ questionId, questionList, answers }: GetAnswerValueInput) {
   const relatedQuestion = questionList.find(({ id }) => id === questionId);
   if (!relatedQuestion) return '';
 
@@ -15,17 +27,24 @@ function getAnswerValue(questionId: string, questionList: Question[], answers: A
   return selectedChoice?.title || '';
 }
 
-export function getDynamicFieldValue(key: string, question: Question, questionList: Question[], answers: Answers) {
+type GetDynamicFieldValueInput = {
+  key: string;
+  question: Question;
+  questionList: Question[];
+  answers: Answers;
+};
+
+export function getDynamicFieldValue({ key, question, questionList, answers }: GetDynamicFieldValueInput) {
   const dynamicField = question.dynamicFields?.find(({ field }) => field === key);
 
   if (!dynamicField) return '';
 
   if (dynamicField.type === 'answer') {
-    return getAnswerValue(dynamicField.questionId, questionList, answers);
+    return getAnswerValue({ questionId: dynamicField.questionId, questionList, answers });
   }
 
   if (dynamicField.type === 'conditional') {
-    return getConditionalValue(dynamicField.field, dynamicField.condition, answers);
+    return getConditionalValue({ field: dynamicField.field, condition: dynamicField.condition, answers });
   }
 
   return '';

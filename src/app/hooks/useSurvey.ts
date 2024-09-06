@@ -34,7 +34,7 @@ export const useSurvey = () => {
   const title = useMemo(() => {
     if (currentQuestion) {
       return parseStringTemplate(currentQuestion?.title, (key: string) =>
-        getDynamicFieldValue(key, currentQuestion, questions, answers)
+        getDynamicFieldValue({ key, question: currentQuestion, questionList: questions, answers })
       );
     }
   }, [currentQuestion, answers, questions]);

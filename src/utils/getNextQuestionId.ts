@@ -7,7 +7,13 @@ function isAnswerMatchingCondition(condition: Condition, answers: Answers) {
   return answers[condition.questionId] === condition.expectedChoiceId;
 }
 
-export function getNextQuestionId(currentQuestion: Question, choice: Choice, answers: Answers) {
+type GetPreviousQuestionIdInput = {
+  currentQuestion: Question;
+  choice: Choice;
+  answers: Answers;
+};
+
+export function getNextQuestionId({ currentQuestion, answers, choice }: GetPreviousQuestionIdInput) {
   const nextQuestion = currentQuestion.next[choice.id];
 
   if (Array.isArray(nextQuestion)) {

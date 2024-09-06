@@ -11,8 +11,14 @@ function checkIsPreviousQuestion(question: Question, currentQuestionId: string) 
   });
 }
 
-export function getPreviousQuestionId(questionList: Question[], currentQuestion: Question, answers: Answers) {
-  return questionList.reduce((prevId, question) => {
+type GetPreviousQuestionIdInput = {
+  questions: Question[];
+  currentQuestion: Question;
+  answers: Answers;
+};
+
+export function getPreviousQuestionId({ questions, currentQuestion, answers }: GetPreviousQuestionIdInput) {
+  return questions.reduce((prevId, question) => {
     if (!prevId && checkIsPreviousQuestion(question, currentQuestion.id) && answers[question.id]) {
       return question.id;
     }

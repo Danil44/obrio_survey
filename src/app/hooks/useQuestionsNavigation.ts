@@ -14,14 +14,14 @@ export const useQuestionsNavigation = () => {
   }));
 
   const previousQuestionPath = useMemo(() => {
-    const previousQuestionId = currentQuestion ? getPreviousQuestionId(questions, currentQuestion, answers) : '';
-    
+    const previousQuestionId = currentQuestion ? getPreviousQuestionId({ questions, currentQuestion, answers }) : '';
+
     return previousQuestionId ? `/${previousQuestionId}` : '';
   }, [currentQuestion, questions, answers]);
 
   const getNextQuestionPath = useCallback(
     (choice: Choice) => {
-      const nextQuestionId = currentQuestion ? getNextQuestionId(currentQuestion, choice, answers) : '';
+      const nextQuestionId = currentQuestion ? getNextQuestionId({ currentQuestion, choice, answers }) : '';
 
       return nextQuestionId ? `/${nextQuestionId}` : '';
     },

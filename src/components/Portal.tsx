@@ -1,10 +1,10 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 type Props = {
-  children: React.ReactNode;
+  children: ReactNode;
   show?: boolean;
   onClose?: () => void;
   selector: string;
@@ -16,6 +16,6 @@ export function Portal({ children, selector, show }: Props) {
   useEffect(() => {
     ref.current = document.getElementById(selector);
   }, [selector]);
-  
+
   return show && ref.current ? createPortal(children, ref.current) : null;
 }
