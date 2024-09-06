@@ -1,3 +1,3 @@
 export type Answers = {
-  [key: string]: number;
+  [key: string]: number | null;
 };

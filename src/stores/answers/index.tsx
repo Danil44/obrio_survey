@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, ReactNode, useContext, useRef } from 'react';
 import { AnswersStore, createAnswersStore } from './answersStore';
 import { useStore } from 'zustand';

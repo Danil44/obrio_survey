@@ -15,7 +15,7 @@ export const useQuestionsNavigation = () => {
 
   const previousQuestionPath = useMemo(() => {
     const previousQuestionId = currentQuestion ? getPreviousQuestionId(questions, currentQuestion, answers) : '';
-
+    
     return previousQuestionId ? `/${previousQuestionId}` : '';
   }, [currentQuestion, questions, answers]);
 

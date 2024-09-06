@@ -4,7 +4,7 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 type Answer = {
-  [key: string]: number;
+  [key: string]: number | null;
 };
 
 export type AnswersStore = {
@@ -23,7 +23,7 @@ export const createAnswersStore = () =>
         setAnswers: (answers: Answer) => {
           set({ answers });
         },
-        clearAnswerById: (id: string) => set((state) => ({ ...state.answers, [id]: null })),
+        clearAnswerById: (id: string) => set((state) => ({ answers: { ...state.answers, [id]: null } })),
       }),
       {
         name: 'answers',

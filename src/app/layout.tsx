@@ -30,6 +30,8 @@ export default function RootLayout({
                 <Header />
 
                 {children}
+
+                <div id="resultsModal" />
               </div>
             </Theme>
           </AnswersProvider>

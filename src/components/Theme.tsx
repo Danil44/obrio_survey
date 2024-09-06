@@ -1,6 +1,6 @@
 'use client';
 
-import { selectQuestionById, useQuestionsStore } from '@/stores/QuestionsProvider';
+import { selectQuestionById, useQuestionsStore } from '@/stores/questions';
 import { ReactNode } from 'react';
 
 export function Theme({ children }: { children: ReactNode }) {

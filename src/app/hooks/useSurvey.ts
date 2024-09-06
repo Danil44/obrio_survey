@@ -13,7 +13,7 @@ export const useSurvey = () => {
 
   const { answers, setAnswers, clearAnswerById } = useAnswersStore((state) => state);
 
-  const selectChoice = (choice: Choice) => () => {
+  const selectChoice = (choice: Choice) => {
     if (currentQuestion?.id) {
       setAnswers({ ...answers, [currentQuestion.id]: choice.id });
     }
