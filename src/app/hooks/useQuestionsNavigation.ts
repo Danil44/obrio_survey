@@ -2,8 +2,8 @@ import { useCallback, useMemo } from 'react';
 import { getPreviousQuestionId } from '@/utils/getPreviousQuestionId';
 import { getNextQuestionId } from '@/utils/getNextQuestionId';
 import { Choice } from '@/types/Choice';
-import { useAnswersStore } from '@/stores/AnswersProvider';
-import { selectQuestionById, useQuestionsStore } from '@/stores/QuestionsProvider';
+import { useAnswersStore } from '@/stores/answers';
+import { selectQuestionById, useQuestionsStore } from '@/stores/questions';
 
 export const useQuestionsNavigation = () => {
   const { answers } = useAnswersStore((state) => state);

@@ -1,9 +1,9 @@
 import { useCallback, useMemo } from 'react';
-import { selectQuestionById, useQuestionsStore } from '@/stores/QuestionsProvider';
+import { selectQuestionById, useQuestionsStore } from '@/stores/questions';
 import { Choice } from '@/types/Choice';
 import { parseStringTemplate } from '@/utils/parseStringTemplate';
 import { getDynamicFieldValue } from '@/utils/getDynamicFieldValue';
-import { useAnswersStore } from '@/stores/AnswersProvider';
+import { useAnswersStore } from '@/stores/answers';
 
 export const useSurvey = () => {
   const { questions, currentQuestion } = useQuestionsStore((state) => ({

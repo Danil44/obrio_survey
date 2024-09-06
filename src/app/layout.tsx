@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
 import './globals.css';
 import React from 'react';
-import QuestionsProvider from '@/stores/QuestionsProvider';
+import QuestionsProvider from '@/stores/questions';
 import surveyConfig from '@/surveyConfig';
 import { Header } from '@/components/Header';
-import AnswersProvider from '@/stores/AnswersProvider';
+import AnswersProvider from '@/stores/answers';
 import { Theme } from '@/components/Theme';
 
 const inter = Open_Sans({ subsets: ['latin'] });
