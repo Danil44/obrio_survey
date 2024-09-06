@@ -1,8 +1,12 @@
 import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
 import './globals.css';
-import SurveyProvider from '@/src/store/answers';
 import React from 'react';
+import QuestionsProvider from '@/stores/QuestionsProvider';
+import surveyConfig from '@/surveyConfig';
+import { Header } from '@/components/Header';
+import AnswersProvider from '@/stores/AnswersProvider';
+import { Theme } from '@/components/Theme';
 
 const inter = Open_Sans({ subsets: ['latin'] });
 
@@ -19,7 +23,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} overflow-y-scroll no-scrollbar`}>
-        <SurveyProvider>{children}</SurveyProvider>
+        <QuestionsProvider questions={surveyConfig.questions}>
+          <AnswersProvider>
+            <Theme>
+              <div className={'bg-primary dark:bg-gradient min-h-screen flex flex-col w-full items-center'}>
+                <Header />
+
+                {children}
+              </div>
+            </Theme>
+          </AnswersProvider>
+        </QuestionsProvider>
       </body>
     </html>
   );

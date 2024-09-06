@@ -1,7 +1,7 @@
-import { Condition } from '@/src/types/Condition';
-import { Answers } from '@/src/store/answers';
-import type { Question } from '@/src/types/Question';
-import { Choice } from '@/src/types/Choice';
+import { Condition } from '@/types/Condition';
+import { Answers } from '@/types/Answers';
+import { Question } from '@/types/Question';
+import { Choice } from '@/types/Choice';
 
 function isAnswerMatchingCondition(condition: Condition, answers: Answers) {
   return answers[condition.questionId] === condition.expectedChoiceId;

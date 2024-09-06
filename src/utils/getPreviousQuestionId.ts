@@ -1,5 +1,5 @@
-import type { Question } from '@/src/types/Question';
-import { Answers } from '@/src/store/answers';
+import { Question } from '@/types/Question';
+import { Answers } from '@/types/Answers';
 
 function checkIsPreviousQuestion(question: Question, currentQuestionId: string) {
   return Object.values(question.next).some((value) => {

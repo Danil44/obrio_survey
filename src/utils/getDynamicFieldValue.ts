@@ -1,6 +1,6 @@
-import { Condition } from '@/src/types/Condition';
-import { Answers } from '@/src/store/answers';
-import { Question } from '@/src/types/Question';
+import { Condition } from '@/types/Condition';
+import { Question } from '@/types/Question';
+import { Answers } from '@/types/Answers';
 
 function getConditionalValue(field: string, condition: Condition, answers: Answers) {
   const conditionMet = answers[condition.questionId] === condition.expectedChoiceId;

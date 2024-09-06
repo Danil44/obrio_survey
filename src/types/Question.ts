@@ -1,7 +1,7 @@
 import { Choice } from './Choice';
 import { Theme } from './Theme';
-import { DynamicField } from '@/src/types/DynamicField';
-import { Condition } from '@/src/types/Condition';
+import { DynamicField } from './DynamicField';
+import { Condition } from './Condition';
 
 export type Question = {
   id: string;

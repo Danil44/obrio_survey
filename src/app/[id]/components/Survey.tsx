@@ -1,19 +1,28 @@
 'use client';
 
-import type { Question } from '@/src/types/Question';
-import { useSurvey } from '@/src/app/[id]/hooks/useSurvey';
-import { useQuestionsNavigation } from '@/src/app/[id]/hooks/useQuestionsNavigation';
 import Link from 'next/link';
+import { Question } from '@/types/Question';
+import { useSurvey } from '@/app/hooks/useSurvey';
+import { useQuestionsNavigation } from '@/app/hooks/useQuestionsNavigation';
+import { useEffect } from 'react';
+import { useQuestionsStore } from '@/stores/QuestionsProvider';
 
 type Props = {
   currentQuestion: Question;
   questionList: Question[];
 };
 
-export function Survey({ currentQuestion, questionList }: Props) {
-  const { selectChoice, checkIsChoiceActive, title } = useSurvey(currentQuestion, questionList);
+export function Survey({ currentQuestion }: Props) {
+  const { selectChoice, checkIsChoiceActive, title } = useSurvey();
+  const { currentQuestionId, setCurrentQuestionId } = useQuestionsStore((state) => state);
 
-  const { getNextQuestionPath } = useQuestionsNavigation({ questionList: questionList, currentQuestion });
+  const { getNextQuestionPath } = useQuestionsNavigation();
+
+  useEffect(() => {
+    if (!currentQuestionId || currentQuestionId !== currentQuestion.id) {
+      setCurrentQuestionId(currentQuestion.id);
+    }
+  }, [currentQuestionId, setCurrentQuestionId, currentQuestion.id]);
 
   return (
     <div className={'flex flex-col w-330 gap-y-7'}>

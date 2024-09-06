@@ -1,8 +1,7 @@
-import surveyConfig from '@/src/surveyConfig';
 import { Survey } from './components/Survey';
 import React from 'react';
-import { Header } from '@/src/app/[id]/components/Header';
 import { redirect } from 'next/navigation';
+import surveyConfig from '@/surveyConfig';
 
 export function generateStaticParams() {
   return surveyConfig.questions.map((question) => ({
@@ -17,15 +16,5 @@ export default function Page({ params }: { params: { id: string } }) {
     return redirect(`/${surveyConfig.questions[0].id}`);
   }
 
-  const isDarkTheme = question.theme === 'dark';
-
-  return (
-    <div className={`${isDarkTheme ? 'dark' : ''}`}>
-      <div className={'bg-primary dark:bg-gradient min-h-screen flex flex-col w-full items-center'}>
-        <Header questionList={surveyConfig.questions} currentQuestion={question} />
-
-        <Survey currentQuestion={question} questionList={surveyConfig.questions} />
-      </div>
-    </div>
-  );
+  return <Survey currentQuestion={question} questionList={surveyConfig.questions} />;
 }

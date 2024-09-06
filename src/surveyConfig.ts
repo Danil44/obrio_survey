@@ -1,4 +1,4 @@
-import { Question } from '@/src/types/Question';
+import { Question } from '@/types/Question';
 
 type SurveyConfig = {
   questions: Question[];
